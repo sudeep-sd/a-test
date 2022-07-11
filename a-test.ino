@@ -43,8 +43,13 @@ void setup() {
     Serial.begin(115200);
 
     pinMode(SW, INPUT);
-
-    pinMode(LED_A, OUTPUT);
+    for (Count = 8;Count < 13;Count++)
+    {
+        pinMode(Count, OUTPUT);
+        digitalWrite(Count, LOW);
+    }
+    Count = 1;
+/*    pinMode(LED_A, OUTPUT);
     pinMode(LED_B, OUTPUT);
     pinMode(LED_C, OUTPUT);
     pinMode(LED_D, OUTPUT);
@@ -53,7 +58,7 @@ void setup() {
     digitalWrite(LED_B, LOW);
     digitalWrite(LED_C, LOW);
     digitalWrite(LED_D, LOW);
-    digitalWrite(TRIAC, LOW);
+    digitalWrite(TRIAC, LOW);*/
 }
 
 void loop() {
@@ -64,7 +69,6 @@ void loop() {
     //outputValue = map(sensorValue, 0, 1023, 0, 255);
     // change the analog out value:
     //analogWrite(analogOutPin, outputValue);
-
     // print the results to the serial monitor:
 
     Serial.print(Count++);
@@ -74,18 +78,20 @@ void loop() {
         if(outputValue == 1)
         {
             digitalWrite(TRIAC, LOW);
+            digitalWrite(LED_D, LOW);
             outputValue = 0;
         }
         else
         {
             digitalWrite(TRIAC, HIGH);
+            digitalWrite(LED_D, HIGH);
             outputValue = 1;
         }
     }
 
     Serial.print(", TIME mSec, " );
     Serial.print(millis());
-    Serial.print(" sensor, " );
+    Serial.print(", sensor, " );
     if (sensorValue_1 > 900 | sensorValue_1 < 100)
         Serial.print("ERROR");
     //else
@@ -95,7 +101,7 @@ void loop() {
         Serial.print("ERROR");
     //else
     Serial.print(sensorValue_2);
-    Serial.print(",\t TRIAC = ");
+    Serial.print(", TRIAC = , ");
     Serial.println(outputValue);
 
     // wait 10 milliseconds before the next loop
