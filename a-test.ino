@@ -49,19 +49,12 @@ void setup() {
         digitalWrite(Count, LOW);
     }
     Count = 1;
-/*    pinMode(LED_A, OUTPUT);
-    pinMode(LED_B, OUTPUT);
-    pinMode(LED_C, OUTPUT);
-    pinMode(LED_D, OUTPUT);
-    pinMode(TRIAC, OUTPUT);
-    digitalWrite(LED_A, LOW);
-    digitalWrite(LED_B, LOW);
-    digitalWrite(LED_C, LOW);
-    digitalWrite(LED_D, LOW);
-    digitalWrite(TRIAC, LOW);*/
+    Serial.println("Press Enter to Start");
+    while (Serial.available() == 0);
 }
 
-void loop() {
+void loop()
+{
     // read the analog in value:
     sensorValue_1 = analogRead(analogInPin4);
     sensorValue_2 = analogRead(analogInPin5);
@@ -89,19 +82,19 @@ void loop() {
         }
     }
 
-    Serial.print(", TIME mSec, " );
+    Serial.print(", TIME mSec," );
     Serial.print(millis());
-    Serial.print(", sensor, " );
+    Serial.print(", sensor," );
     if (sensorValue_1 > 900 | sensorValue_1 < 100)
-        Serial.print("ERROR");
+        Serial.print("ERROR-");
     //else
     Serial.print(sensorValue_1);
-    Serial.print(", " );
+    Serial.print("," );
     if (sensorValue_2 > 900 | sensorValue_2 < 100)
-        Serial.print("ERROR");
+        Serial.print("ERROR-");
     //else
     Serial.print(sensorValue_2);
-    Serial.print(", TRIAC = , ");
+    Serial.print(", TRIAC = ,");
     Serial.println(outputValue);
 
     // wait 10 milliseconds before the next loop
